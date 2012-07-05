@@ -33,43 +33,43 @@
 		</div>
 	</div>
 
-	<div class="container-fluid">
-		<div class="row-fluid">
-			<div class="span3">
-				<p><span class="label label-important">Important</span> Use AT LEAST a width of 1024 pixels for this browser window AND use a MODERN Browser, like Mozilla Firefox, Chrome, Opera or Safari, which should be also <u>UP TO DATE</u>! This is very important as we use "modern" features and this application needs also a new and FAST JavaScript engine to work properly!</p>
-				<p>We directly use JavaScript for the drawn function. Please have a look at this <a href="https://developer.mozilla.org/en/JavaScript/Reference">reference</a> if you are not familiar with the mathematical <a href="https://developer.mozilla.org/en/JavaScript/Reference/Operators/Operator_Precedence">operators</a> or <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Math/">functions</a> of JavaScript. You can also use logic in your function as you can see in the last sample function (bandpass).</p>
-				<p>Always remember "With great power comes great responsibility" and do not forget to have fun :-)</p>
-				<form class="well">
-					<label>Sample mathematical functions:</label>
-					<select id="samples">
-						<option>Math.sin(x / 100)</option>
-						<option>-x * x + 10 * x - 10</option>
-						<option>(x - 350)*(x - 350) * Math.cos(x / 100) * -1 * Math.sin(x / 100)</option>
-						<option>Math.sin(Math.pow(x, Math.E) / (1500 * 1500))</option>
-						<option>Math.abs(x - 350)</option>
-						<option>Math.abs(x - 350) * Math.sin(x / 100)</option>
-						<option>function(){
+	<div class="row">
+		<div class="span2 sidebar">
+			<p><span class="label label-important">Important</span> Use AT LEAST a width of 1024 pixels for this browser window AND use a MODERN Browser, like Mozilla Firefox, Chrome, Opera or Safari, which should be also <u>UP TO DATE</u>! This is very important as we use "modern" browser features and this application needs also a new and FAST JavaScript engine to work properly!</p>
+			<p><span class="label label-info">Info</span> We directly use JavaScript for the drawn function. Please have a look at this <a href="https://developer.mozilla.org/en/JavaScript/Reference">reference</a> if you are not familiar with the mathematical <a href="https://developer.mozilla.org/en/JavaScript/Reference/Operators/Operator_Precedence">operators</a> or <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Math/">functions</a> of JavaScript. You can also use logic in your function as you can see in the last sample function (bandpass).</p>
+			<p>Always remember "with great power comes great responsibility" and do not forget to have fun :-)</p>
+			<form class="well">
+				<label>Sample mathematical functions:</label>
+				<select id="samples">
+					<option>Math.sin(x / 100)</option>
+					<option>-x * x + 10 * x - 10</option>
+					<option>(x - 350)*(x - 350) * Math.cos(x / 100) * -1 * Math.sin(x / 100)</option>
+					<option>Math.sin(Math.pow(x, Math.E) / (1500 * 1500))</option>
+					<option>Math.abs(x - 350)</option>
+					<option>Math.abs(x - 350) * Math.sin(x / 100)</option>
+					<option>function(){
 var bandPass = 0.3
 var y = Math.sin(x / 30);
 return (y > bandPass) ? bandPass : (y &lt; -bandPass) ? -bandPass : y;
 }()</option>
-					</select>
-					
-					<label>Current mathematical function:</label>
-					<textarea id="montefunc" rows="10">Math.sin(x / 100)</textarea><br/>
-					
-					<label>Number of samples:</label>
-					<input id="num_samples" type="text" value="100"><br/>
-					
-					<label class="checkbox"><input id="userandorg" type="checkbox" value="1"/>&nbsp;Use random numbers from <a href="http://random.org">random.org</a></label>
-					<span class="help-block"><span class="label label-important">Important</span> This service has a quota of about 1.000.000 numbers per IP address!</span>
-					
-					<button id="start" class="btn btn-success" style="width: 220px;">DRAW and EXECUTE the<br/>Monte Carlo Method!!!</button>
-				</form>
-			</div>
-			<div class="span8">
-				<div id="canvas"></div>
+				</select>
+				
+				<label>Current mathematical function:</label>
+				<textarea id="montefunc" rows="10">Math.sin(x / 100)</textarea><br/>
+				
+				<label>Number of samples:</label>
+				<input id="num_samples" type="text" value="100"><br/>
+				
+				<label class="checkbox"><input id="userandorg" type="checkbox" value="1"/>&nbsp;Use random numbers from <a href="http://random.org">random.org</a></label>
+				<span class="help-block"><span class="label label-important">Important</span> This service has a quota of about 1.000.000 numbers per IP address!</span>
+				
+				<button id="start" class="btn btn-success">DRAW and EXECUTE the<br/>Monte Carlo Method!!!</button>
+			</form>
+		</div>
+		<div class="span9 content">
+			<div id="canvas"></div>
 
+			<div class="well">
 				<div id="bounds"></div>
 				<div id="positiv-examples"></div>
 				<div id="negative-examples"></div>

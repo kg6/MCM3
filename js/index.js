@@ -1,6 +1,6 @@
 // define the scale of our diagram canvas
-var margin = { top: 10, right: 10, bottom: 10, left: 60 },
-	width = 750 - margin.left - margin.right,
+var margin = { top: 0, right: 0, bottom: 0, left: 60 },
+	width = 700 - margin.left - margin.right,
 	height = 600 - margin.top - margin.bottom;
 
 var x_min, x_max, y_min, y_max;
@@ -273,14 +273,14 @@ function drawApproximationPoint(x, y, up) {
 		.attr('cx', scale_x(x))
 		.attr('cy', scale_y(y))
 		.attr('r', 3.0)
-		.attr('class', (up) ? 'montedotup' : 'montedotdown');
+		.attr('class', (up) ? 'monte-dot-in' : 'monte-dot-out');
 }
 
 // display the result of the monte carlo method
 function displayMonteCarloMethodResult(pos, neg) {
 	var area = approximateArea(Math.abs(x_max), Math.abs(y_min) + Math.abs(y_max), pos);
 
-	$('#bounds').html('<b>Bounds:</b> x=' + x_min + ' to ' + x_max + ' y=' + y_min + ' to ' + y_max);
+	$('#bounds').html('<b>Bounds:</b> x from ' + x_min + ' to ' + x_max + ' and y from' + y_min + ' to ' + y_max);
 	$('#positiv-examples').html('<b class="pos">Positive samples</b> (in the curve): ' + pos);
 	$('#negative-examples').html('<b class="neg">Negative samples</b> (out of the curve): ' + neg);
 	$('#approximated-area').html('<b class="area">Approximated area</b> (in the curve): ' + area);

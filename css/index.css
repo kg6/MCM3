@@ -1,10 +1,26 @@
+/* bootstrap modificatoins */
+
 body {
 	padding-top: 60px;
 }
 
-input, select, textarea {
+button, input, select, textarea {
 	width: 100%;
 }
+
+div.content {
+	margin-left: 10px;
+}
+
+div.row {
+	padding: 10px;
+}
+
+div.sidebar {
+	width: 285px;
+}
+
+/* application styles */
 
 .axis path, .axis line {
 	fill: none;
@@ -25,9 +41,8 @@ path.line {
 circle {
 	stroke-width: 0.5px;
 }
-circle.graphdot { fill: #00FF00; stroke: #FF0000; }
-circle.montedotup { fill: #0000FF; stroke: #00FFFF; }
-circle.montedotdown { fill: #FF0000; stroke: #00FFFF; }
+circle.monte-dot-in { fill: #0000FF; stroke: #6666FF; }
+circle.monte-dot-out { fill: #FF0000; stroke: #FF6666; }
 
 b.pos { color: #0000FF; }
 b.neg { color: #FF0000; }
