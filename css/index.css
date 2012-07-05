@@ -1,0 +1,34 @@
+body {
+	padding-top: 60px;
+}
+
+input, select, textarea {
+	width: 100%;
+}
+
+.axis path, .axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
+
+path.area {
+	fill: #AAAAAA;
+}
+
+path.line {
+	fill: none;
+	stroke: #00FF00;
+	stroke-width: 1px;
+}
+
+circle {
+	stroke-width: 0.5px;
+}
+circle.graphdot { fill: #00FF00; stroke: #FF0000; }
+circle.montedotup { fill: #0000FF; stroke: #00FFFF; }
+circle.montedotdown { fill: #FF0000; stroke: #00FFFF; }
+
+b.pos { color: #0000FF; }
+b.neg { color: #FF0000; }
+b.area { color: #AAAAAA; }
