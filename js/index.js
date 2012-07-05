@@ -273,7 +273,8 @@ function drawApproximationPoint(x, y, up) {
 		.attr('cx', scale_x(x))
 		.attr('cy', scale_y(y))
 		.attr('r', 3.0)
-		.attr('class', (up) ? 'monte-dot-in' : 'monte-dot-out');
+		.attr('class', (up) ? 'monte-dot-in' : 'monte-dot-out')
+		.attr('title', x + ', ' + y);
 }
 
 // display the result of the monte carlo method
