@@ -280,8 +280,8 @@ function drawApproximationPoint(x, y, up) {
 function displayMonteCarloMethodResult(pos, neg) {
 	var area = approximateArea(Math.abs(x_max), Math.abs(y_min) + Math.abs(y_max), pos);
 
-	$('#bounds').html('<b>Bounds:</b> x from ' + x_min + ' to ' + x_max + ' and y from' + y_min + ' to ' + y_max);
-	$('#positiv-examples').html('<b class="pos">Positive samples</b> (in the curve): ' + pos);
-	$('#negative-examples').html('<b class="neg">Negative samples</b> (out of the curve): ' + neg);
+	$('#bounds').html('<b>Bounds:</b> x from ' + x_min + ' to ' + x_max + ' and y from ' + y_min + ' to ' + y_max);
+	$('#positiv-examples').html('<b class="pos">Positive samples</b> (in the curve): ' + (pos * 100.0) + '%');
+	$('#negative-examples').html('<b class="neg">Negative samples</b> (out of the curve): ' + (neg * 100.0) + '%');
 	$('#approximated-area').html('<b class="area">Approximated area</b> (in the curve): ' + area);
 }

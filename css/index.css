@@ -8,16 +8,13 @@ button, input, select, textarea {
 	width: 100%;
 }
 
-div.content {
-	margin-left: 10px;
-}
-
-div.row {
-	padding: 10px;
-}
-
 div.sidebar {
-	width: 285px;
+	width: 245px !important;
+}
+
+div.content {
+	margin-left: 20px !important;
+	width: 700px !important;
 }
 
 /* application styles */
