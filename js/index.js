@@ -18,7 +18,7 @@ function setup() {
 	$('#function_execute').click(function() {
 		// create our mathematical function
 		var function_definition = $('#function_definition').val();
-		
+
 		var f = function(x) {
 			var y = 0;
 			
@@ -127,13 +127,13 @@ function setup() {
 		var x_rnd_values = null;
 		var y_rnd_values = null;
 
-		requestRandomNumbers(samples_count, x_min, x_max, function(values) {
+		requestRandomNumbers(samples_count, x_min, x_max, $('#use_random_org').is(':checked'), function(values) {
 			x_rnd_values = values;
 			
 			processMonteCarloMethod($('#function_definition').val(), x_rnd_values, y_rnd_values, drawApproximationPoint, displayMonteCarloMethodResult);
 		});
 
-		requestRandomNumbers(samples_count, y_min, y_max, function(values) {
+		requestRandomNumbers(samples_count, y_min, y_max, $('#use_random_org').is(':checked'), function(values) {
 			y_rnd_values = values;
 			
 			processMonteCarloMethod($('#function_definition').val(), x_rnd_values, y_rnd_values, drawApproximationPoint, displayMonteCarloMethodResult);
@@ -145,13 +145,13 @@ function setup() {
 }
 
 // fetch random numbers and execute the callback function if possible
-function requestRandomNumbers(numbercount, normalize_min, normalize_max, callback) {
+function requestRandomNumbers(numbercount, normalize_min, normalize_max, use_random_org, callback) {
 	var max = 1000000000;
 	
 	var af = (normalize_max - normalize_min);
 
 	// should we use random.org?
-	if ($('#use_random_org').is(':checked')) {
+	if (use_random_org) {
 		$.ajax({
 			url: 'http://www.random.org/integers/?num=' + numbercount + '&min=' + 0 + '&max=' + max + '&col=1&base=10&format=plain&rnd=new',
 			cache: false,
@@ -162,7 +162,7 @@ function requestRandomNumbers(numbercount, normalize_min, normalize_max, callbac
 			
 			var numbers = data.split("\n");
 			
-			for(var i = 0; i < numbers.length; i++) {
+			for (var i = 0; i < numbers.length; i++) {
 				// map the random number to our value range
 				numbers[i] = parseInt(numbers[i], 10) / max;
 				numbers[i] = numbers[i] * af + normalize_min
@@ -175,7 +175,7 @@ function requestRandomNumbers(numbercount, normalize_min, normalize_max, callbac
 	else { // use JavaScript random numbers
 		var numbers = [];
 		
-		for(var i = 0; i < numbercount; i++) {
+		for (var i = 0; i < numbercount; i++) {
 			// map the random number to our value range
 			numbers.push(Math.random() * af + normalize_min);
 		}
@@ -188,7 +188,7 @@ function requestRandomNumbers(numbercount, normalize_min, normalize_max, callbac
 // execute the monte carlo method
 function processMonteCarloMethod(func, rnd_x_values, rnd_y_values, datapoint_callback, result_callback) {
 	// check if the coordination data is already there
-	if(rnd_x_values == null || rnd_y_values == null)
+	if (rnd_x_values == null || rnd_y_values == null)
 		return;
 	
 	// create our mathematical function
