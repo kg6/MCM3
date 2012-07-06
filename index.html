@@ -20,7 +20,7 @@
 			setup();
 
 			// execute the monte carlo method right on startup
-			$('#start').click();
+			$('#function_execute').click();
 		});
 	</script>
 </head>
@@ -41,7 +41,7 @@
 				
 				<form class="well">
 					<label>Sample mathematical functions:</label>
-					<select id="samples">
+					<select id="function_samples">
 						<option>Math.sin(x / 100)</option>
 						<option>-x * x + 10 * x - 10</option>
 						<option>(x - 350)*(x - 350) * Math.cos(x / 100) * -1 * Math.sin(x / 100)</option>
@@ -56,26 +56,20 @@ return (y > bandPass) ? bandPass : (y &lt; -bandPass) ? -bandPass : y;
 					</select>
 					
 					<label>Current mathematical function:</label>
-					<textarea id="montefunc" rows="10">Math.sin(x / 100)</textarea><br/>
+					<textarea id="function_definition" rows="10">Math.sin(x / 100)</textarea><br/>
 					
 					<label>Number of samples:</label>
-					<input id="num_samples" type="text" value="1000"><br/>
+					<input id="samples_count" type="text" value="1000"><br/>
 					
-					<label class="checkbox"><input id="userandorg" type="checkbox" value="1"/>&nbsp;Use random numbers from <a href="http://random.org">random.org</a></label>
+					<label class="checkbox"><input id="use_random_org" type="checkbox" value="1"/>&nbsp;Use random numbers from <a href="http://random.org">random.org</a></label>
 					<span class="help-block"><span class="label label-important">Important</span> This service has a quota of about 1.000.000 numbers per IP address!</span>
 					
-					<button id="start" class="btn btn-success">DRAW and EXECUTE the<br/>Monte Carlo Method!!!</button>
+					<button id="function_execute" class="btn btn-success">DRAW and EXECUTE the<br/>Monte Carlo Method!!!</button>
 				</form>
 			</div>
 			<div class="span8 content">
 				<div id="canvas"></div>
-
-				<div class="well">
-					<div id="bounds"></div>
-					<div id="positiv-examples"></div>
-					<div id="negative-examples"></div>
-					<div id="approximated-area"></div>
-				</div>
+				<div id="results" class="well"></div>
 			</div>
 		</div>
 	</div>

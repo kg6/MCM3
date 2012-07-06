@@ -38,9 +38,9 @@ path.line {
 circle {
 	stroke-width: 0.5px;
 }
-circle.monte-dot-in { fill: #0000FF; stroke: #6666FF; }
-circle.monte-dot-out { fill: #FF0000; stroke: #FF6666; }
+circle.dot-in { fill: #0000FF; stroke: #6666FF; }
+circle.dot-out { fill: #FF0000; stroke: #FF6666; }
 
-b.pos { color: #0000FF; }
-b.neg { color: #FF0000; }
+b.positive { color: #0000FF; }
+b.negative { color: #FF0000; }
 b.area { color: #AAAAAA; }

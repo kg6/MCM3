@@ -10,19 +10,19 @@ var scale_x, scale_y;
 
 function setup() {
 	// react on value changes of the samples select
-	$('#samples').change(function() {
-		$('#montefunc').val($('#samples option:selected').text());
+	$('#function_samples').change(function() {
+		$('#function_definition').val($('#function_samples option:selected').text());
 	});
 
-	// react on clicks of the start button
-	$('#start').click(function() {
+	// react on clicks of the execute button
+	$('#function_execute').click(function() {
 		// create our mathematical function
-		var montefunc = $('#montefunc').val();
+		var function_definition = $('#function_definition').val();
 		
 		var f = function(x) {
 			var y = 0;
 			
-			eval('y = ' + montefunc + ';');
+			eval('y = ' + function_definition + ';');
 			
 			return y;
 		}
@@ -121,22 +121,22 @@ function setup() {
 			.call(yAxis);
 		
 		// fetch the number of dots we have to generate
-		var num_samples = parseInt($('#num_samples').val(), 10);
+		var samples_count = parseInt($('#samples_count').val(), 10);
 		
 		// fetch a own set for the X and Y coordinates of the dots
 		var x_rnd_values = null;
 		var y_rnd_values = null;
 
-		requestRandomNumbers(num_samples, x_min, x_max, function(values) {
+		requestRandomNumbers(samples_count, x_min, x_max, function(values) {
 			x_rnd_values = values;
 			
-			processMonteCarloMethod($('#montefunc').val(), x_rnd_values, y_rnd_values, drawApproximationPoint, displayMonteCarloMethodResult);
+			processMonteCarloMethod($('#function_definition').val(), x_rnd_values, y_rnd_values, drawApproximationPoint, displayMonteCarloMethodResult);
 		});
 
-		requestRandomNumbers(num_samples, y_min, y_max, function(values) {
+		requestRandomNumbers(samples_count, y_min, y_max, function(values) {
 			y_rnd_values = values;
 			
-			processMonteCarloMethod($('#montefunc').val(), x_rnd_values, y_rnd_values, drawApproximationPoint, displayMonteCarloMethodResult);
+			processMonteCarloMethod($('#function_definition').val(), x_rnd_values, y_rnd_values, drawApproximationPoint, displayMonteCarloMethodResult);
 		});
 
 		// do not submit the form!
@@ -151,7 +151,7 @@ function requestRandomNumbers(numbercount, normalize_min, normalize_max, callbac
 	var af = (normalize_max - normalize_min);
 
 	// should we use random.org?
-	if ($('#userandorg').is(':checked')) {
+	if ($('#use_random_org').is(':checked')) {
 		$.ajax({
 			url: 'http://www.random.org/integers/?num=' + numbercount + '&min=' + 0 + '&max=' + max + '&col=1&base=10&format=plain&rnd=new',
 			cache: false,
@@ -259,12 +259,8 @@ function approximateArea(width, height, percentage) {
 
 // reset the view for a new diagram
 function resetMonteCarloMethod() {
-	d3.select('#canvas').html('');
-
-	$('#bounds').html('');
-	$('#positiv-examples').html('');
-	$('#negative-examples').html('');
-	$('#approximated-area').html('');
+	$('#canvas').html('');
+	$('#results').html('');
 }
 
 // draw one DOT of the monte carlo method
@@ -273,7 +269,7 @@ function drawApproximationPoint(x, y, up) {
 		.attr('cx', scale_x(x))
 		.attr('cy', scale_y(y))
 		.attr('r', 3.0)
-		.attr('class', (up) ? 'monte-dot-in' : 'monte-dot-out')
+		.attr('class', (up) ? 'dot-in' : 'dot-out')
 		.attr('title', x + ', ' + y);
 }
 
@@ -281,8 +277,9 @@ function drawApproximationPoint(x, y, up) {
 function displayMonteCarloMethodResult(pos, neg) {
 	var area = approximateArea(Math.abs(x_max), Math.abs(y_min) + Math.abs(y_max), pos);
 
-	$('#bounds').html('<b>Bounds:</b> x from ' + x_min + ' to ' + x_max + ' and y from ' + y_min + ' to ' + y_max);
-	$('#positiv-examples').html('<b class="pos">Positive samples</b> (in the curve): ' + (pos * 100.0) + '%');
-	$('#negative-examples').html('<b class="neg">Negative samples</b> (out of the curve): ' + (neg * 100.0) + '%');
-	$('#approximated-area').html('<b class="area">Approximated area</b> (in the curve): ' + area);
+	$('#results')
+		.append('<p><b>Bounds:</b> x from ' + x_min + ' to ' + x_max + ' and y from ' + y_min + ' to ' + y_max + '</p>')
+		.append('<p><b class="positive">Positive samples</b> (in the curve): ' + (pos * 100.0) + '%</p>')
+		.append('<p><b class="negative">Negative samples</b> (out of the curve): ' + (neg * 100.0) + '%</p>')
+		.append('<p><b class="area">Approximated area</b> (in the curve): ' + area + '</p>');
 }
