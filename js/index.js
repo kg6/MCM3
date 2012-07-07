@@ -7,7 +7,9 @@ var bound_x_min, bound_x_max, bound_y_min, bound_y_max;
 
 var diagram_scale_x, diagram_scale_y;
 
-// initialize the UI and everything else that is needed
+/**
+ * initialize the UI and everything else that is needed
+ */
 function setup() {
 	// react on value changes of the samples select
 	$('#function_samples').change(function() {
@@ -16,13 +18,13 @@ function setup() {
 
 	// react on clicks of the execute button
 	$('#function_execute').click(function() {
-		// reset every aspect of the monte carlo calulation
-		reset();
+		resetDiagram();
 		
 		var func = createDrawnFunction();
 		
-		if (! func)
+		if (! func) {
 			return false;
+		}
 
 		createDiagram(func);
 		
@@ -50,7 +52,9 @@ function setup() {
 	});
 }
 
-// create the whole diagram
+/**
+ * create the whole diagram
+ */
 function createDiagram(func) {
 	// create the function's x/y coordinates
 	var data = [];
@@ -112,7 +116,7 @@ function createDiagram(func) {
 		.attr('clip-path', 'url(#clip)')
 		.attr('d', line(data));
 
-	// add the x and y axis to the diagram
+	// add the axis to the diagram
 	var xAxis = d3.svg.axis()
 		.scale(diagram_scale_x)
 		.ticks(20)
@@ -131,7 +135,9 @@ function createDiagram(func) {
 		.call(yAxis);
 }
 
-// create and validate the drawn function
+/**
+ * create and validate the drawn function
+ */
 function createDrawnFunction() {
 	var function_definition = $('#function_definition').val();
 
@@ -148,7 +154,7 @@ function createDrawnFunction() {
 		eval(func(1)); 
 	}
 	catch (e) {
-		// this function is not valid JavaScript code so alert the user and exit the function
+		// this function is not valid JavaScript code, so alert the user and exit the function
 		alert(e);
 		
 		return null;
@@ -157,7 +163,9 @@ function createDrawnFunction() {
 	return func;
 }
 
-// display the result of the monte carlo method
+/**
+ * display the result of the monte carlo method
+ */
 function displayResults(pos, neg, area) {
 	$('#results')
 		.append('<p><b>Bounds:</b> x from ' + bound_x_min + ' to ' + bound_x_max + ' and y from ' + bound_y_min + ' to ' + bound_y_max + '</p>')
@@ -166,8 +174,11 @@ function displayResults(pos, neg, area) {
 		.append('<p><b class="area">Approximated area</b> (in the curve): ' + area + '</p>');
 }
 
-// fetch random numbers and execute the callback function if possible
+/**
+ * fetch random numbers and execute the callback function
+ */
 function requestRandomNumbers(number_count, normalize_min, normalize_max, use_random_org, callback) {
+	// numbers will be normalized onto this range
 	var normalize_range = (normalize_max - normalize_min);
 
 	// Use random.org random numbers
@@ -181,8 +192,9 @@ function requestRandomNumbers(number_count, normalize_min, normalize_max, use_ra
 				alert('Request to random.org failed. Maybe you reached the request limit of random.org? The error message is: ' + errorThrown);
 			}
 		}).done(function (data) {
-			var data = data.split("\n");
 			var numbers = [];
+			
+			data = data.split("\n");
 
 			for (var i = 0; i < data.length; i++) {
 				// map the random number to the value range
@@ -208,13 +220,16 @@ function requestRandomNumbers(number_count, normalize_min, normalize_max, use_ra
 	}
 }
 
-// execute the monte carlo method
+/**
+ * execute the monte carlo method
+ */
 function processMonteCarloMethod(func, random_x_values, random_y_values, result_callback) {
-	// check if the coordination data is already there
-	if (random_x_values == null || random_y_values == null)
+	// check if the coordination data is already ready
+	if (random_x_values === null || random_y_values === null) {
 		return;
+	}
 	
-	//counter for positive/negative examples
+	// counter for positive/negative examples
 	var positive = 0;
 	var negative = 0;
 	
@@ -230,12 +245,12 @@ function processMonteCarloMethod(func, random_x_values, random_y_values, result_
 		if ((y >= 0 && random_y_values[i] >= 0 && random_y_values[i] <= y) || (y < 0 && random_y_values[i] <= 0 && random_y_values[i] >= y)) {
 			positive++;
 			
-			dots.push({ x: random_x_values[i], y: random_y_values[i], in: true });
+			dots.push({ x: random_x_values[i], y: random_y_values[i], dot_in: true });
 		}
 		else {
 			negative++;
 			
-			dots.push({ x: random_x_values[i], y: random_y_values[i], in: false });
+			dots.push({ x: random_x_values[i], y: random_y_values[i], dot_in: false });
 		}
 	}
 	
@@ -247,7 +262,7 @@ function processMonteCarloMethod(func, random_x_values, random_y_values, result_
 				.attr('cx', function(d) { return diagram_scale_x(d.x); })
 				.attr('cy', function(d) { return diagram_scale_y(d.y); })
 				.attr('r', 3.0)
-				.attr('class', function(d) { return (d.in) ? 'dot-in' : 'dot-out' })
+				.attr('class', function(d) { return (d.dot_in) ? 'in' : 'out'; })
 				.attr('title', function(d) { return d.x + ', ' + d.y; });
 	
 	// calulate the percentage of positive and negative samples
@@ -265,8 +280,10 @@ function processMonteCarloMethod(func, random_x_values, random_y_values, result_
 	result_callback(positive, negative, area);
 }
 
-// reset every aspect of the monte carlo calulation for a new diagram
-function reset() {
+/**
+ * reset every aspect of the monte carlo calulation for a new diagram
+ */
+function resetDiagram() {
 	// reset the function bounds
 	bound_x_min = 0;
 	bound_x_max = canvas_width - 1;

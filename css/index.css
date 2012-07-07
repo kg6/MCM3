@@ -38,8 +38,8 @@ path.line {
 circle {
 	stroke-width: 0.5px;
 }
-circle.dot-in { fill: #0000FF; stroke: #6666FF; }
-circle.dot-out { fill: #FF0000; stroke: #FF6666; }
+circle.in { fill: #0000FF; stroke: #6666FF; }
+circle.out { fill: #FF0000; stroke: #FF6666; }
 
 b.positive { color: #0000FF; }
 b.negative { color: #FF0000; }
