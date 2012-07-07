@@ -164,7 +164,7 @@ function createDrawnFunction() {
 }
 
 /**
- * display the result of the monte carlo method
+ * display the result of the Monte Carlo method
  */
 function displayResults(pos, neg, area) {
 	$('#results')
@@ -221,7 +221,7 @@ function requestRandomNumbers(number_count, normalize_min, normalize_max, use_ra
 }
 
 /**
- * execute the monte carlo method
+ * execute the Monte Carlo method
  */
 function processMonteCarloMethod(func, random_x_values, random_y_values, result_callback) {
 	// check if the coordination data is already ready
