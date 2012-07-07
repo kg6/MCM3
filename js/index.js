@@ -1,5 +1,5 @@
 var canvas,
-	canvas_margin = { top: 10, right: 10, bottom: 10, left: 60 },
+	canvas_margin = { top: 10, right: 10, bottom: 30, left: 60 },
 	canvas_width = 700 - canvas_margin.left - canvas_margin.right,
 	canvas_height = 600 - canvas_margin.top - canvas_margin.bottom;
 
