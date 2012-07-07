@@ -1,6 +1,6 @@
 # MCM3
 
-A simple Monte Carlo method editor using [d3.js](http://d3js.org/), [jQuery](http://jquery.com/) and [Twitter Bootstrap](http://twitter.github.com/bootstrap/) by [Claus Schabetsberger](claus.schabetsberger@gmail.com) and [Markus Zimmermann](mailto:markus.zimmermann@nethead.at).
+A simple Monte Carlo method editor using [d3.js](http://d3js.org/), [jQuery](http://jquery.com/) and [Twitter Bootstrap](http://twitter.github.com/bootstrap/) by [Claus Schabetsberger](mailto:claus.schabetsberger@gmail.com) and [Markus Zimmermann](mailto:markus.zimmermann@nethead.at).
 
 
 ## What does the Monte Carlo method do?
@@ -37,11 +37,9 @@ You can also go wild and use non-mathematical operators and constructs. This is 
 
 ``` javascript
 function(){
+	var bandPass = 0.3
+	var y = Math.sin(x / 30);
 
-var bandPass = 0.3
-
-var y = Math.sin(x / 30);
-
-return (y > bandPass) ? bandPass : (y < -bandPass) ? -bandPass : y;
+	return (y > bandPass) ? bandPass : (y < -bandPass) ? -bandPass : y;
 }()
 ```
